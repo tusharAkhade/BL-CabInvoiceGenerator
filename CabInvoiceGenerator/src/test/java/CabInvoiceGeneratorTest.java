@@ -5,7 +5,6 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.Hashtable;
 
 public class CabInvoiceGeneratorTest {
@@ -21,11 +20,13 @@ public class CabInvoiceGeneratorTest {
      */
     @Test
     public void givenDistanceAndTime_ShouldReturnTotalFare() {
+
         double distance = 4.0;
         int time = 10;
         double totalFare = inVoiceGenerator.calculateFare(distance, time);
 
         Assert.assertEquals(50.0, totalFare, 0.0);
+
     }
 
     /**
@@ -33,11 +34,13 @@ public class CabInvoiceGeneratorTest {
      */
     @Test
     public void givenDistanceAndTime_ShouldReturnMinimumFare() {
+
         double distance = 0.1;
         int time = 2;
         double totalFare = inVoiceGenerator.calculateFare(distance, time);
 
         Assert.assertEquals(5.0, totalFare, 0.0);
+
     }
 
     /**
@@ -45,6 +48,7 @@ public class CabInvoiceGeneratorTest {
      */
     @Test
     public void givenMultipleRides_ShouldReturnInVoiceSummary() {
+
         Ride[] rides = {
                 new Ride(2.0, 5),
                 new Ride(0.1, 1)};
@@ -53,6 +57,7 @@ public class CabInvoiceGeneratorTest {
         InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
 
         Assert.assertEquals(expectedInvoiceSummary,summary);
+
     }
 
     /**
@@ -60,6 +65,7 @@ public class CabInvoiceGeneratorTest {
      */
     @Test
     public void givenUserID_ShouldGetTheListOfRidesFromRepo_ReturnInVoice() {
+
         int userID = 1;
         Ride[] rides = {
                 new Ride(2.0, 5),
@@ -72,7 +78,20 @@ public class CabInvoiceGeneratorTest {
 
         InvoiceSummary expectedInVoice = inVoiceGenerator.inVoiceService(listOfRides);
         Assert.assertEquals(expectedInVoice,summary);
+
     }
 
+    /**
+     * Test Case 5 : TO get premium rides cost
+     */
+    @Test
+    public void ifSelectedPremiumRides_ShouldReturnPremiumPrices() {
 
+        double distance = 4.0;
+        int time = 10;
+        double totalFare = inVoiceGenerator.calculateFare(distance, time);
+
+        Assert.assertEquals(80.0, totalFare, 0.0);
+
+    }
 }
