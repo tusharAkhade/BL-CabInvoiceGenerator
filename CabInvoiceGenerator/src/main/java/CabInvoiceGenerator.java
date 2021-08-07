@@ -1,13 +1,13 @@
 /****************************************************************************************************
  *
  * Purpose :
- *  UC 3 : Enhanced Invoice :
- *         The invoice generator should now return the following as a part of invoice :
- *         - Total Number of Rides
- *         - Total Fare
- *         - Average Fare per Ride
+ *  UC 4 : InVoice Service :
+ *         Given an User ID,The Invoice Service gets the list of rides from
+ *         Ride Repository,and returns an invoice
  *
  ****************************************************************************************************/
+
+import java.util.Hashtable;
 
 public class CabInvoiceGenerator {
 
@@ -44,5 +44,11 @@ public class CabInvoiceGenerator {
         }
         System.out.println(totalAggregateFare);
         return new InvoiceSummary(rides.length,totalAggregateFare);
+    }
+
+    public InvoiceSummary inVoiceService(Hashtable<Integer, Ride[]> listOfRides){
+        Ride[] rides = listOfRides.get(1);
+        InvoiceSummary inVoiceSummary = calculateFare(rides);
+        return inVoiceSummary;
     }
 }
